@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recomendador de filmes</title>
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="page.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="/">HM</a>
+  <nav><span class="muted">Projeto 01 · Recomendador de filmes</span></nav>
+</header>
+
+<main>
+  <h1 class="title">O que você quer assistir hoje?</h1>
+  <p class="lead">Descreva o filme com as suas palavras: o clima, a história, o que já gostou. A busca compara com sinopses, e você pode refinar a conversa.</p>
+
+  <div id="log" class="log" role="log" aria-live="polite"></div>
+
+  <ul id="examples" class="chips examples"></ul>
+  <form id="form" class="ask" autocomplete="off">
+    <input id="question" type="text" maxlength="1000" placeholder="Ex.: um suspense psicológico tipo Ilha do Medo, mas mais leve" aria-label="Descrição do filme" required>
+    <button type="submit" class="btn primary" id="send">Buscar</button>
+  </form>
+  <p id="info" class="muted small"></p>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

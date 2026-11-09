@@ -1,0 +1,29 @@
+# Produção/VPS: só puxa a imagem do GHCR. A rede "edge" é criada pelo repositório portfolio-edge.
+# Localmente, use também o compose.local.yml (constrói a imagem e publica a porta).
+services:
+  filmes:
+    image: ${IMAGE:-ghcr.io/hmarcio2/portfolio-filmes}:${IMAGE_TAG:-latest}
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      PORTFOLIO_TRUST_PROXY: "1"
+      PORTFOLIO_FILMES_CATALOG_DIR: /srv/catalog
+    networks: [edge]
+    volumes:
+      - filmes_index:/srv/data/index
+      - ./catalog:/srv/catalog:ro   # opcional: coloque aqui o tmdb_movies.csv
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 768m
+
+volumes:
+  filmes_index:
+
+networks:
+  edge:
+    external: true
+    name: edge
