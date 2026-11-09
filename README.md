@@ -111,7 +111,7 @@ Com milhares de filmes não dá para julgar relevância à mão, então `evaluat
 
 ### Leitura do agente real (Gemini Flash-Lite, catálogo CMU, `evaluation/try_agent.py`)
 
-Sete pedidos em português, lidos à mão (não é uma avaliação com nota):
+Seis pedidos em português, lidos à mão (não é uma avaliação com nota):
 - A tradução funciona: "Um suspense psicológico com um final surpreendente" virou a consulta `a psychological thriller with a surprising twist ending`; "filmes de animação sobre brinquedos que ganham vida" trouxe os três Toy Story.
 - "Algo como A Origem" foi para `similar_movies` com `Inception` (o modelo usou o título original, como mandei) e voltaram Dreamscape, The Matrix e Paycheck. "Algo parecido com Matrix, mas mais recente" usou o filtro de ano sozinho.
 - **Fraquezas vistas:** no refinamento "me mostre outros, mais antigos que 2000" os resultados foram fracos (Blues Brothers 2000, Gumby) e o agente avisou que o catálogo é limitado; é o limite de 5000 filmes escolhidos por bilheteria, não por tema. As respostas listam só 3 filmes e os cartões mostram 6, então o texto nem sempre explica todos os cartões. Uma execução por pedido, sem medir variação.
