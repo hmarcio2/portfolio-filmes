@@ -181,6 +181,8 @@ docker compose -f compose.yml -f compose.local.yml up --build
 ```
 Abra `http://localhost:8003`.
 
+**Atenção ao índice do catálogo grande:** no primeiro start o app embute todos os filmes, ou seja, 5000 chamadas ao embedder. Com o Ollama local isso levou 5 minutos; com a API do Google no plano gratuito pode estourar a cota (não testei), e a VPS não tem GPU para o Ollama. O índice só vale para o embedder que o criou (a consulta precisa do mesmo modelo), então não dá para gerar com o Ollama e consultar com o Google. O índice fica no volume `filmes_index` e não é recalculado a cada deploy. Medido em Docker com o embedder de hash (sem chaves): os 5000 filmes cabem no teto de 768 MiB (cerca de 320 MiB em repouso).
+
 **Catálogo grande em produção:** gere `cmu_movies.csv` (`scripts/prepare_cmu.py`) ou `tmdb_movies.csv` (`scripts/fetch_tmdb.py`) localmente e copie para `/opt/apps/filmes/catalog/` na VPS (para forçar um, `PORTFOLIO_FILMES_CATALOG=cmu` no `.env`). O compose monta essa pasta em `/srv/catalog` e o app passa a usar o arquivo (e mostrar a atribuição da fonte, que a licença exige). O índice vetorial fica no volume `filmes_index`, então os embeddings não são recalculados a cada deploy; trocar de embedder recria o índice sozinho.
 
 **Deploy na VPS:** configure uma vez a VPS e os segredos do ambiente `production` conforme o README do `portfolio-edge`

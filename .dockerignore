@@ -8,3 +8,5 @@ __pycache__
 evaluation/results
 data/index
 deploy
+data/cmu_movies.csv
+data/tmdb_movies.csv
